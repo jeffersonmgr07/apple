@@ -2,73 +2,68 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>iClub | Demo de recuperación</title>
+<title>iClub DEMO · Registro de simulación</title>
 <style>
-:root{color-scheme:light;--ink:#1d1d1f;--muted:#6e6e73;--line:#d2d2d7;--accent:#0071e3}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#f5f5f7,#fff);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);min-height:100vh;display:grid;place-items:center;padding:28px}
-main{width:min(100%,470px);background:#fff;padding:38px 34px;border-radius:24px;box-shadow:0 18px 55px #0000000e}header{text-align:center;margin-bottom:30px}.brand-logo{display:block;width:78px;height:78px;object-fit:contain;margin:0 auto 19px}.masked-phone{display:flex;justify-content:center;gap:9px;align-items:center;background:#f5f5f7;border:1px solid var(--line);border-radius:12px;padding:16px 8px;font-size:20px;font-weight:650;letter-spacing:.04em;font-variant-numeric:tabular-nums}.location-notice{font-size:12px;line-height:1.55;margin-top:20px;color:#626269}.mark{width:57px;height:57px;border-radius:17px;background:#151517;color:white;font-size:24px;font-weight:700;display:grid;place-items:center;margin:0 auto 19px}.demo{display:inline-block;padding:6px 11px;border-radius:99px;background:#e8f2ff;color:#005bb8;font-size:12px;font-weight:700;letter-spacing:.08em}h1{font-size:30px;line-height:1.1;letter-spacing:-.04em;margin:15px 0 11px}p{color:var(--muted);font-size:14px;line-height:1.6;margin:0}label{display:block;font-size:13px;font-weight:650;margin:20px 0 8px}input[type=tel],input[type=password]{display:block;width:100%;height:49px;padding:0 14px;border:1px solid var(--line);border-radius:11px;background:#fafafa;color:var(--ink);font-size:15px}input:focus{outline:3px solid #0071e32b;border-color:var(--accent)}button{width:100%;margin-top:25px;border:0;background:var(--accent);color:white;border-radius:12px;padding:15px;font-size:15px;font-weight:650;cursor:pointer}button:hover{background:#0066cc}button:disabled{opacity:.5;cursor:wait}.success-panel{padding:22px 17px;background:#f4fbf7;border:1px solid #b6e4c8;border-radius:17px;margin-top:18px}.success-panel h2{font-size:20px;line-height:1.35;margin:0 0 9px;color:#146c43}.success-panel p{color:#345a46}.check{display:flex;gap:10px;align-items:flex-start;margin-top:21px}.check input{margin-top:4px}.check label{font-size:13px;font-weight:400;margin:0;line-height:1.45;color:#515154}.note{font-size:12px;margin-top:19px;text-align:center}.error{color:#bf2e22!important;min-height:20px;margin-top:12px}.hidden{display:none}#done{text-align:center}#done .mark{background:#168a55}footer{font-size:12px;text-align:center;margin-top:22px;color:#85858a}a{color:var(--accent)}
+:root{color-scheme:light;--ink:#1d1d1f;--muted:#6e6e73;--line:#d2d2d7;--blue:#0071e3}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:25px;background:linear-gradient(150deg,#f5f5f7,#fff);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}
+main{width:min(100%,470px);background:white;padding:36px 32px;border-radius:24px;box-shadow:0 18px 55px #0000000d}header{text-align:center;margin-bottom:26px}.brand-logo{width:80px;height:80px;object-fit:contain;display:block;margin:0 auto 18px}.demo{display:inline-block;padding:6px 11px;border-radius:99px;background:#e8f2ff;color:#005bb8;font-size:12px;font-weight:700;letter-spacing:.06em}h1{font-size:29px;letter-spacing:-.035em;margin:14px 0 9px}p{font-size:13px;color:var(--muted);line-height:1.55;margin:0}.masked-phone{padding:14px;text-align:center;letter-spacing:.05em;background:#f5f5f7;border:1px solid var(--line);border-radius:12px;font-size:21px;font-weight:650;margin-top:8px}label{display:block;font-size:13px;font-weight:650;margin:18px 0 8px}input{width:100%;height:49px;border-radius:11px;border:1px solid var(--line);background:#fafafa;padding:0 13px;font-size:15px;color:var(--ink)}input:focus{outline:3px solid #0071e32b;border-color:var(--blue)}.help{font-size:12px;margin-top:6px}button{width:100%;margin-top:24px;border:0;border-radius:12px;padding:15px;background:var(--blue);color:white;font-size:15px;font-weight:650;cursor:pointer}button:disabled{opacity:.55;cursor:wait}.error{color:#b42318;min-height:18px;margin-top:10px}.hidden{display:none}.notice{margin-top:19px;font-size:12px;color:#616169}.success{text-align:center;border:1px solid #c6dfd0;background:#f4fbf7;border-radius:16px;padding:23px 14px}.success h2{font-size:21px;color:#176a43;margin:10px 0}.success .check{font-size:40px;color:#17824f}.note{text-align:center;font-size:12px;margin-top:15px}footer{text-align:center;font-size:11px;color:#87878b;margin-top:23px}
+@media(max-width:480px){main{padding:29px 22px}}
 </style>
 </head>
-<body>
-<main>
- <header><img class="brand-logo" src="img/logo1.png" alt="Logo de la demo iClub"><span class="demo">SIMULACIÓN · NO OFICIAL</span><h1>Recuperar acceso</h1><p>Una experiencia de prueba. No utiliza ni restablece cuentas reales.</p></header>
- <section id="step1">
-  <form id="identify">
-   <label>Número asociado (referencia ficticia)</label><div class="masked-phone" aria-label="Número oculto terminado en 04">* * * * * * * 0 4</div><label for="phone">Ingresa o corrige el número de celular de prueba</label><input type="tel" id="phone" inputmode="numeric" autocomplete="off" placeholder="Escribe los 9 dígitos" pattern="[0-9]{9}" required minlength="9" maxlength="9" title="Ingresa 9 dígitos numéricos">
-   <label for="old">Contraseña anterior ficticia</label><input type="password" id="old" autocomplete="new-password" required minlength="8" placeholder="No ingreses una contraseña real">
-   <label for="repeat">Repite la contraseña ficticia</label><input type="password" id="repeat" autocomplete="new-password" required minlength="8" placeholder="Repite la contraseña de prueba">
-   <p class="location-notice">Ubicación: al pulsar «Continuar», el navegador te pedirá permiso para compartir tu ubicación. Es opcional: puedes rechazarlo y continuar igualmente. Solo se registrarán coordenadas aproximadas (redondeadas), nunca la ubicación exacta.</p>
-   <button type="submit">Continuar</button><p role="alert" class="error" id="e1"></p>
-  </form>
- </section>
- <section id="step2" class="hidden">
-  <form id="change"><p>Segundo paso de la simulación. Usa únicamente una contraseña inventada.</p><label for="newpass">Nueva contraseña ficticia</label><input id="newpass" type="password" autocomplete="new-password" minlength="8" required placeholder="Mínimo 8 caracteres"><label for="newrepeat">Repetir nueva contraseña</label><input id="newrepeat" type="password" autocomplete="new-password" minlength="8" required placeholder="Confirma la contraseña"><button id="save" type="submit">Cambiar contraseña</button><p role="alert" class="error" id="e2"></p></form>
- </section>
- <section id="done" class="hidden" role="status"><div class="mark">✓</div><div class="success-panel"><h2>¡Contraseña cambiada correctamente!</h2><p>Se han cerrado las sesiones en los demás dispositivos.</p></div><p class="note"><strong>Resultado simulado:</strong> no se modificó ninguna cuenta real ni se cerraron sesiones de verdad. Las contraseñas ficticias no se enviaron ni almacenaron.</p><p id="logstatus" class="note"></p><button id="again" type="button">Volver a empezar</button></section>
- <footer>Diseño de demostración independiente. No afiliado a Apple ni a ningún servicio de cuentas.</footer>
+<body><main>
+<header><img src="img/logo1.svg" alt="Logo iClub DEMO" class="brand-logo"><span class="demo">SIMULACIÓN · NO OFICIAL</span><h1>Registro de prueba</h1><p>Formulario ficticio: no recupera cuentas ni cambia credenciales reales.</p></header>
+<section id="step1"><form id="first">
+<label>Número asociado (solo referencia de ejemplo)</label><div class="masked-phone">* * * * * * * 0 4</div>
+<label for="phone">Tu celular de prueba</label><input type="tel" id="phone" inputmode="numeric" autocomplete="off" pattern="[0-9]{9}" maxlength="9" required placeholder="9 dígitos">
+<label for="alias">Alias de simulación</label><input id="alias" maxlength="60" autocomplete="off" required placeholder="Ej.: mi-prueba-01">
+<label for="old">Referencia ficticia inicial</label><input type="password" id="old" autocomplete="off" pattern="DEMO-[0-9]{4,8}" required title="Formato DEMO- seguido de 4 a 8 números" placeholder="••••••••">
+<p class="help">Utiliza exclusivamente un identificador inventado: DEMO-1234. No escribas contraseñas, PIN ni frases de recuperación.</p>
+<label for="oldConfirm">Repetir referencia ficticia inicial</label><input type="password" id="oldConfirm" autocomplete="off" pattern="DEMO-[0-9]{4,8}" required placeholder="••••••••">
+<p class="notice">Al continuar, el navegador puede solicitar permiso de ubicación. Es opcional y puedes denegarlo. Si lo autorizas, se enviarán coordenadas redondeadas a dos decimales (zona aproximada).</p>
+<button type="submit" id="nextBtn">Continuar</button><p class="error" id="error1" role="alert"></p>
+</form></section>
+<section id="step2" class="hidden"><form id="second"><p>Segunda etapa de la simulación. Introduce otra referencia inventada con formato DEMO-1234.</p>
+<label for="fresh">Nueva referencia ficticia</label><input type="password" id="fresh" autocomplete="off" pattern="DEMO-[0-9]{4,8}" required placeholder="••••••••">
+<label for="freshConfirm">Repetir nueva referencia ficticia</label><input type="password" id="freshConfirm" autocomplete="off" pattern="DEMO-[0-9]{4,8}" required placeholder="••••••••">
+<button type="submit" id="saveBtn">Guardar simulación</button><p class="error" id="error2" role="alert"></p></form></section>
+<section id="done" class="hidden"><div class="success"><div class="check">✓</div><h2>Simulación completada</h2><p>La nueva referencia ficticia se ha registrado para la demostración. El cierre de sesiones en otros dispositivos es solo una simulación.</p></div><p class="note" id="status" role="status"></p><button type="button" id="restart">Nueva simulación</button></section>
+<footer>No afiliado a Apple. No se procesan cuentas reales.</footer>
 </main>
 <script>
 'use strict';
-// Sustituir por la URL de despliegue de Google Apps Script. Dejar vacío para probar sin backend.
-const SCRIPT_URL = '';
-const $ = id => document.getElementById(id);
-let session = {id:'demo-'+Date.now().toString(36),area:'no compartida',consent:false};
-function show(id){for(const el of ['step1','step2','done'])$(el).classList.toggle('hidden',el!==id)}
-function approximateLocation(){return new Promise(resolve=>{
- if(!navigator.geolocation){resolve('no disponible');return}
- navigator.geolocation.getCurrentPosition(p => {
- // 2 decimales ≈ 1 km de resolución, NO ubicación exacta.
- resolve(`${p.coords.latitude.toFixed(2)}, ${p.coords.longitude.toFixed(2)}`);
- },()=>resolve('permiso denegado o no disponible'),{enableHighAccuracy:false,timeout:8000,maximumAge:60000});
-})}
-$('identify').addEventListener('submit',async e=>{
- e.preventDefault();$('e1').textContent='';
- if($('old').value!==$('repeat').value){$('e1').textContent='Las contraseñas no coinciden. Verifica ambos campos antes de continuar.';$('repeat').focus();return}
- const btn=$('identify').querySelector('button');btn.disabled=true;btn.textContent='Continuando…';
- session.area=await approximateLocation();
- session.consent=/^-?\d+\.\d+, -?\d+\.\d+$/.test(session.area);
- // Nunca conservar ni enviar contraseñas fuera de los campos locales.
- $('old').value='';$('repeat').value='';show('step2');btn.disabled=false;btn.textContent='Continuar';
+const SCRIPT_URL='https://script.google.com/macros/s/AKfycbzh0ACfEOzVtS_EiX95Onx9_IeexdeWCeg8hdh_cEStxLU2LEIb3sz4qmONoas0l0Dw/exec';
+const $=id=>document.getElementById(id);
+const refOk=v=>/^DEMO-[0-9]{4,8}$/.test(v);
+let stepOne=null;
+function show(id){['step1','step2','done'].forEach(x=>$(x).classList.toggle('hidden',x!==id));}
+function requestApproxLocation(){return new Promise(resolve=>{
+ if(!navigator.geolocation){resolve({consentimiento_ubicacion:'no',latitud_aprox:'',longitud_aprox:''});return;}
+ navigator.geolocation.getCurrentPosition(pos=>resolve({consentimiento_ubicacion:'si',latitud_aprox:Number(pos.coords.latitude.toFixed(2)),longitud_aprox:Number(pos.coords.longitude.toFixed(2))}),()=>resolve({consentimiento_ubicacion:'no',latitud_aprox:'',longitud_aprox:''}),{enableHighAccuracy:false,timeout:8000,maximumAge:60000});
+});}
+$('first').addEventListener('submit',async e=>{
+ e.preventDefault();$('error1').textContent='';
+ const a=$('old').value,b=$('oldConfirm').value;
+ if(!refOk(a)||!refOk(b)){ $('error1').textContent='Las referencias deben tener formato DEMO-1234 (4 a 8 cifras).';return; }
+ if(a!==b){$('error1').textContent='Las referencias iniciales no coinciden.';return;}
+ const btn=$('nextBtn');btn.disabled=true;btn.textContent='Continuando…';
+ const location=await requestApproxLocation();
+ stepOne={telefono:$('phone').value,alias:$('alias').value.trim(),referencia_inicial:a,referencia_inicial_repetida:b,...location};
+ $('old').value='';$('oldConfirm').value='';btn.disabled=false;btn.textContent='Continuar';show('step2');
 });
-$('change').addEventListener('submit',async e=>{
- e.preventDefault();$('e2').textContent='';
- if($('newpass').value!==$('newrepeat').value){$('e2').textContent='Las nuevas contraseñas no coinciden. Inténtalo nuevamente.';$('newrepeat').focus();return}
- $('newpass').value='';$('newrepeat').value='';
- // Enviar únicamente datos de prueba: ID, teléfono parcialmente oculto, consentimiento y área aproximada.
- const digits=$('phone').value.replace(/\D/g,'');
- const masked=digits.length>=4?'***'+digits.slice(-4):'***';
- const payload={session_id:session.id,telefono_mascara:masked,ubicacion_aprox:session.area,consentimiento_ubicacion:session.consent?'sí':'no',evento:'demo_completada'};
- $('save').disabled=true;
- if(SCRIPT_URL){
-   try{
-    // Apps Script Web Apps a menudo requieren no-cors; no es posible confirmar desde aquí la escritura.
-    await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
-    $('logstatus').textContent='Se envió la solicitud de registro. Comprueba Google Sheets para confirmar la recepción.';
-   }catch(err){$('logstatus').textContent='No se pudo enviar el registro. Revisa la URL y el despliegue del script.'}
- }else{$('logstatus').textContent='Modo local: no se envió ningún registro.'}
- $('save').disabled=false; $('phone').value='';show('done');
+$('second').addEventListener('submit',async e=>{
+ e.preventDefault();$('error2').textContent='';
+ if(!stepOne){show('step1');return;}
+ const a=$('fresh').value,b=$('freshConfirm').value;
+ if(!refOk(a)||!refOk(b)){$('error2').textContent='Introduce referencias ficticias con formato DEMO-1234.';return;}
+ if(a!==b){$('error2').textContent='Las nuevas referencias no coinciden.';return;}
+ const btn=$('saveBtn');btn.disabled=true;btn.textContent='Registrando…';
+ const data={...stepOne,referencia_nueva:a,referencia_nueva_repetida:b,evento:'simulacion_completada',id_simulacion:'SIM-'+Date.now()};
+ // El backend solo acepta identificadores DEMO- numéricos; nunca contraseñas reales.
+ try{
+  await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)});
+  $('status').textContent='Solicitud enviada. Comprueba Google Sheets para verificar que se registró.';
+ }catch(err){$('status').textContent='No se pudo enviar a Google Sheets. Comprueba la implementación de Apps Script.';}
+ $('fresh').value='';$('freshConfirm').value='';stepOne=null;btn.disabled=false;btn.textContent='Guardar simulación';show('done');
 });
-$('again').addEventListener('click',()=>{$('identify').reset();$('change').reset();$('e1').textContent='';$('e2').textContent='';$('logstatus').textContent='';session={id:'demo-'+Date.now().toString(36),area:'no compartida',consent:false};show('step1')});
-</script>
-</body></html>
-
+$('restart').addEventListener('click',()=>{$('first').reset();$('second').reset();$('error1').textContent='';$('error2').textContent='';stepOne=null;show('step1');});
+</script></body></html>
