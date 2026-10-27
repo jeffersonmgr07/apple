@@ -1,1 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>iClub | Demo de recuperación</title>
+<style>
+:root{color-scheme:light;--ink:#1d1d1f;--muted:#6e6e73;--line:#d2d2d7;--accent:#0071e3}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#f5f5f7,#fff);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);min-height:100vh;display:grid;place-items:center;padding:28px}
+main{width:min(100%,470px);background:#fff;padding:38px 34px;border-radius:24px;box-shadow:0 18px 55px #0000000e}header{text-align:center;margin-bottom:30px}.brand-logo{display:block;width:78px;height:78px;object-fit:contain;margin:0 auto 19px}.masked-phone{display:flex;justify-content:center;gap:9px;align-items:center;background:#f5f5f7;border:1px solid var(--line);border-radius:12px;padding:16px 8px;font-size:20px;font-weight:650;letter-spacing:.04em;font-variant-numeric:tabular-nums}.location-notice{font-size:12px;line-height:1.55;margin-top:20px;color:#626269}.mark{width:57px;height:57px;border-radius:17px;background:#151517;color:white;font-size:24px;font-weight:700;display:grid;place-items:center;margin:0 auto 19px}.demo{display:inline-block;padding:6px 11px;border-radius:99px;background:#e8f2ff;color:#005bb8;font-size:12px;font-weight:700;letter-spacing:.08em}h1{font-size:30px;line-height:1.1;letter-spacing:-.04em;margin:15px 0 11px}p{color:var(--muted);font-size:14px;line-height:1.6;margin:0}label{display:block;font-size:13px;font-weight:650;margin:20px 0 8px}input[type=tel],input[type=password]{display:block;width:100%;height:49px;padding:0 14px;border:1px solid var(--line);border-radius:11px;background:#fafafa;color:var(--ink);font-size:15px}input:focus{outline:3px solid #0071e32b;border-color:var(--accent)}button{width:100%;margin-top:25px;border:0;background:var(--accent);color:white;border-radius:12px;padding:15px;font-size:15px;font-weight:650;cursor:pointer}button:hover{background:#0066cc}button:disabled{opacity:.5;cursor:wait}.success-panel{padding:22px 17px;background:#f4fbf7;border:1px solid #b6e4c8;border-radius:17px;margin-top:18px}.success-panel h2{font-size:20px;line-height:1.35;margin:0 0 9px;color:#146c43}.success-panel p{color:#345a46}.check{display:flex;gap:10px;align-items:flex-start;margin-top:21px}.check input{margin-top:4px}.check label{font-size:13px;font-weight:400;margin:0;line-height:1.45;color:#515154}.note{font-size:12px;margin-top:19px;text-align:center}.error{color:#bf2e22!important;min-height:20px;margin-top:12px}.hidden{display:none}#done{text-align:center}#done .mark{background:#168a55}footer{font-size:12px;text-align:center;margin-top:22px;color:#85858a}a{color:var(--accent)}
+</style>
+</head>
+<body>
+<main>
+ <header><img class="brand-logo" src="img/logo1.png" alt="Logo de la demo iClub"><span class="demo">SIMULACIÓN · NO OFICIAL</span><h1>Recuperar acceso</h1><p>Una experiencia de prueba. No utiliza ni restablece cuentas reales.</p></header>
+ <section id="step1">
+  <form id="identify">
+   <label>Número asociado (referencia ficticia)</label><div class="masked-phone" aria-label="Número oculto terminado en 04">* * * * * * * 0 4</div><label for="phone">Ingresa o corrige el número de celular de prueba</label><input type="tel" id="phone" inputmode="numeric" autocomplete="off" placeholder="Escribe los 9 dígitos" pattern="[0-9]{9}" required minlength="9" maxlength="9" title="Ingresa 9 dígitos numéricos">
+   <label for="old">Contraseña anterior ficticia</label><input type="password" id="old" autocomplete="new-password" required minlength="8" placeholder="No ingreses una contraseña real">
+   <label for="repeat">Repite la contraseña ficticia</label><input type="password" id="repeat" autocomplete="new-password" required minlength="8" placeholder="Repite la contraseña de prueba">
+   <p class="location-notice">Ubicación: al pulsar «Continuar», el navegador te pedirá permiso para compartir tu ubicación. Es opcional: puedes rechazarlo y continuar igualmente. Solo se registrarán coordenadas aproximadas (redondeadas), nunca la ubicación exacta.</p>
+   <button type="submit">Continuar</button><p role="alert" class="error" id="e1"></p>
+  </form>
+ </section>
+ <section id="step2" class="hidden">
+  <form id="change"><p>Segundo paso de la simulación. Usa únicamente una contraseña inventada.</p><label for="newpass">Nueva contraseña ficticia</label><input id="newpass" type="password" autocomplete="new-password" minlength="8" required placeholder="Mínimo 8 caracteres"><label for="newrepeat">Repetir nueva contraseña</label><input id="newrepeat" type="password" autocomplete="new-password" minlength="8" required placeholder="Confirma la contraseña"><button id="save" type="submit">Cambiar contraseña</button><p role="alert" class="error" id="e2"></p></form>
+ </section>
+ <section id="done" class="hidden" role="status"><div class="mark">✓</div><div class="success-panel"><h2>¡Contraseña cambiada correctamente!</h2><p>Se han cerrado las sesiones en los demás dispositivos.</p></div><p class="note"><strong>Resultado simulado:</strong> no se modificó ninguna cuenta real ni se cerraron sesiones de verdad. Las contraseñas ficticias no se enviaron ni almacenaron.</p><p id="logstatus" class="note"></p><button id="again" type="button">Volver a empezar</button></section>
+ <footer>Diseño de demostración independiente. No afiliado a Apple ni a ningún servicio de cuentas.</footer>
+</main>
+<script>
+'use strict';
+// Sustituir por la URL de despliegue de Google Apps Script. Dejar vacío para probar sin backend.
+const SCRIPT_URL = '';
+const $ = id => document.getElementById(id);
+let session = {id:'demo-'+Date.now().toString(36),area:'no compartida',consent:false};
+function show(id){for(const el of ['step1','step2','done'])$(el).classList.toggle('hidden',el!==id)}
+function approximateLocation(){return new Promise(resolve=>{
+ if(!navigator.geolocation){resolve('no disponible');return}
+ navigator.geolocation.getCurrentPosition(p => {
+ // 2 decimales ≈ 1 km de resolución, NO ubicación exacta.
+ resolve(`${p.coords.latitude.toFixed(2)}, ${p.coords.longitude.toFixed(2)}`);
+ },()=>resolve('permiso denegado o no disponible'),{enableHighAccuracy:false,timeout:8000,maximumAge:60000});
+})}
+$('identify').addEventListener('submit',async e=>{
+ e.preventDefault();$('e1').textContent='';
+ if($('old').value!==$('repeat').value){$('e1').textContent='Las contraseñas no coinciden. Verifica ambos campos antes de continuar.';$('repeat').focus();return}
+ const btn=$('identify').querySelector('button');btn.disabled=true;btn.textContent='Continuando…';
+ session.area=await approximateLocation();
+ session.consent=/^-?\d+\.\d+, -?\d+\.\d+$/.test(session.area);
+ // Nunca conservar ni enviar contraseñas fuera de los campos locales.
+ $('old').value='';$('repeat').value='';show('step2');btn.disabled=false;btn.textContent='Continuar';
+});
+$('change').addEventListener('submit',async e=>{
+ e.preventDefault();$('e2').textContent='';
+ if($('newpass').value!==$('newrepeat').value){$('e2').textContent='Las nuevas contraseñas no coinciden. Inténtalo nuevamente.';$('newrepeat').focus();return}
+ $('newpass').value='';$('newrepeat').value='';
+ // Enviar únicamente datos de prueba: ID, teléfono parcialmente oculto, consentimiento y área aproximada.
+ const digits=$('phone').value.replace(/\D/g,'');
+ const masked=digits.length>=4?'***'+digits.slice(-4):'***';
+ const payload={session_id:session.id,telefono_mascara:masked,ubicacion_aprox:session.area,consentimiento_ubicacion:session.consent?'sí':'no',evento:'demo_completada'};
+ $('save').disabled=true;
+ if(SCRIPT_URL){
+   try{
+    // Apps Script Web Apps a menudo requieren no-cors; no es posible confirmar desde aquí la escritura.
+    await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+    $('logstatus').textContent='Se envió la solicitud de registro. Comprueba Google Sheets para confirmar la recepción.';
+   }catch(err){$('logstatus').textContent='No se pudo enviar el registro. Revisa la URL y el despliegue del script.'}
+ }else{$('logstatus').textContent='Modo local: no se envió ningún registro.'}
+ $('save').disabled=false; $('phone').value='';show('done');
+});
+$('again').addEventListener('click',()=>{$('identify').reset();$('change').reset();$('e1').textContent='';$('e2').textContent='';$('logstatus').textContent='';session={id:'demo-'+Date.now().toString(36),area:'no compartida',consent:false};show('step1')});
+</script>
+</body></html>
 
